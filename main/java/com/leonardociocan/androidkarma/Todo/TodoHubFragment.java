@@ -1,6 +1,7 @@
 package com.leonardociocan.androidkarma.Todo;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.leonardociocan.androidkarma.Core;
+import com.leonardociocan.androidkarma.KarmaChangedListener;
 import com.leonardociocan.androidkarma.R;
 
 import java.util.ArrayList;
@@ -43,7 +45,9 @@ public class TodoHubFragment extends Fragment{
 
                 if(keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
                     Toast.makeText(getActivity() ,"hello",Toast.LENGTH_LONG).show();
-                    Todo td = new Todo(text.getText().toString());
+
+                    int value  = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("default_value" , "150"));
+                    Todo td = new Todo(text.getText().toString() , value , false);
                     Core.Todos.add(td);
                     Core.source.addItem(td.getName() , td.getValue() , td.getPositive() , "todo");
                     adapter.notifyDataSetChanged();
@@ -56,6 +60,12 @@ public class TodoHubFragment extends Fragment{
         listView = (ListView)rootView.findViewById(R.id.todo_list);
         adapter =new TodoListAdapter(getActivity());
         listView.setAdapter(adapter);
+        Core.addKarmaEventListener(new KarmaChangedListener() {
+            @Override
+            public void OnKarmaChanged() {
+                adapter.notifyDataSetChanged();
+            }
+        });
         return rootView;
     }
 }

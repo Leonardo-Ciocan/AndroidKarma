@@ -12,6 +12,12 @@ public class Reward {
         this.Positive = positive;
     }
 
+    public Reward(String name , Integer value , Boolean positive ) {
+        this.Name = name;
+        this.Value = value;
+        this.Positive = positive;
+    }
+
     public long getID() {
 
         return ID;

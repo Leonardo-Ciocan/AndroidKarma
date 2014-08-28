@@ -3,6 +3,7 @@ package com.leonardociocan.androidkarma.Todo;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,11 @@ class TodoListAdapter extends BaseAdapter {
                 h.Positive = (positive.isChecked());
                 Core.source.updateItem(h.getID() , h.getName() , h.getValue() , h.Positive , "todo");
                 Core.addKarma( ((Todo)vi.getTag()).Name, ((Todo)vi.getTag()).Value  * (((Todo)vi.getTag()).Positive ? 1 : -1));
-
+                if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("delete_todo",false)){
+                    data.remove(vi.getTag());
+                    Core.source.delete(((Todo)vi.getTag()).getID());
+                    notifyDataSetChanged();
+                }
                 //Core.setKarma(Core.getKarma()  + ((Todo)vi.getTag()).Value  * (((Todo)vi.getTag()).Positive ? 1 : -1));
             }
         });

@@ -1,6 +1,7 @@
 package com.leonardociocan.androidkarma.Reward;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.leonardociocan.androidkarma.Core;
+import com.leonardociocan.androidkarma.KarmaChangedListener;
 import com.leonardociocan.androidkarma.R;
 import com.leonardociocan.androidkarma.Reward.Reward;
 
@@ -44,7 +46,9 @@ public class RewardHubFragment extends Fragment{
 
                 if(keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
                     Toast.makeText(getActivity() ,"hello",Toast.LENGTH_LONG).show();
-                    Reward reward = new Reward(text.getText().toString());
+
+                    int value  = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("default_value" , "150"));
+                    Reward reward = new Reward(text.getText().toString() , value, true);
                     Core.Rewards.add(reward);
                     Core.source.addItem(reward.getName() , reward.getValue() , reward.getPositive() , "reward");
                     adapter.notifyDataSetChanged();
@@ -56,6 +60,12 @@ public class RewardHubFragment extends Fragment{
 
         listView = (ListView)rootView.findViewById(R.id.reward_list);
         adapter =new RewardListAdapter(getActivity());
+        Core.addKarmaEventListener(new KarmaChangedListener() {
+            @Override
+            public void OnKarmaChanged() {
+                adapter.notifyDataSetChanged();
+            }
+        });
         listView.setAdapter(adapter);
         return rootView;
     }

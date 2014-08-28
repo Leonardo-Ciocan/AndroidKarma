@@ -5,6 +5,7 @@ public class Log {
     String Time;
     boolean Positive;
     long id;
+    int Value;
 
     public String getName() {
         return Name;
@@ -30,18 +31,22 @@ public class Log {
         Positive = positive;
     }
 
-    public Log(long id , String name, String time, boolean positive) {
+    public Log(long id , String name, String time, boolean positive , int value) {
         this.id = id;
+        this.Value = value;
         Name = name;
         Time = time;
         Positive = positive;
     }
 
-    public Log(String name, String time, boolean positive) {
-
+    public Log(String name, String time, boolean positive , int value) {
+        this.Value = value;
         Name = name;
         Time = time;
         Positive = positive;
     }
 
+    public int getValue() {
+        return Value;
+    }
 }

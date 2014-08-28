@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="Karma settings">
+<PreferenceCategory android:title="Application settings">
+
+    <EditTextPreference android:key="default_value" android:title="Default value"></EditTextPreference>
+    <CheckBoxPreference android:key="delete_todo" android:title="Delete todos on completion"></CheckBoxPreference>
+    <Preference android:key="delete_all" android:title="Delete all data" ></Preference>
+</PreferenceCategory>
+    <PreferenceCategory android:title="Feedback">
+        <Preference android:key="review" android:title="Review app in play store"></Preference>
+        <Preference android:key="email" android:title="Email developer" android:summary="leonardo.ciocan@outlook.com"></Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

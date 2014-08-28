@@ -37,7 +37,15 @@ public class Core {
     }
 
     public static void setKarma(int karma) {
+
         Karma = karma;
+
+        if(PreferenceManager.getDefaultSharedPreferences(context) != null) {
+            SharedPreferences sharedPreferences = (PreferenceManager.getDefaultSharedPreferences(context));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("karma", Karma);
+            editor.commit();
+        }
     }
 
     public static void addKarma(String name , int i){
@@ -51,13 +59,25 @@ public class Core {
         editor.putInt("karma", Karma);
         editor.commit();
 
-        Log log = new Log(name , DateFormat.getDateTimeInstance().format(new Date()) , i > 0);
+        Log log = new Log(name , DateFormat.getDateTimeInstance().format(new Date()) , i > 0 , i);
         Logs.add(log);
-        source.addLog( log.getName() , log.getTime() , log.isPositive());
+        source.addLog( log.getName() , log.getTime() , log.isPositive() , log.getValue());
+    }
+
+    public static void triggerChanged(){
+        for(KarmaChangedListener ls : listener){
+            ls.OnKarmaChanged();
+        }
     }
 
     public static int getKarma(){
         return Karma;
+    }
+
+    public static int[] LogValues(){
+        int[] vs = new int[Logs.size()];
+        for(int x = 0; x< Logs.size();x++) vs[x] = Logs.get(x).Value;
+        return vs;
     }
 }
 

@@ -34,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(DATABASE_CREATE);
-        sqLiteDatabase.execSQL("create table logs(_id integer primary key autoincrement, name text , positive integer , date text );");
+        sqLiteDatabase.execSQL("create table logs(_id integer primary key autoincrement, name text , positive integer , date text , value integer );");
     }
 
     @Override

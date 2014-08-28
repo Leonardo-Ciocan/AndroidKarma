@@ -36,11 +36,12 @@ public class CoreDataSource {
         database.insert(helper.TABLE , null , values);
     }
 
-    public void addLog(String name  , String date , Boolean positive){
+    public void addLog(String name  , String date , Boolean positive , int value){
         ContentValues values = new ContentValues();
         values.put(helper.NAME_COLUMN , name);
         values.put(helper.POSITIVE_COLUMN , positive ? "1" : "0");
         values.put("date" , date);
+        values.put("value" , value);
         database.insert("logs" , null , values);
     }
 
@@ -113,7 +114,7 @@ public class CoreDataSource {
 
     public ArrayList<Log> GetLogs(){
         ArrayList<Log> todos = new ArrayList<Log>();
-        Cursor cursor = database.query("logs" , new String[] {helper.ID_COLUMN , helper.NAME_COLUMN , "date", helper.POSITIVE_COLUMN}
+        Cursor cursor = database.query("logs" , new String[] {helper.ID_COLUMN , helper.NAME_COLUMN , "date", helper.POSITIVE_COLUMN ,helper.VALUE_COLUMN}
                 ,null,null,null,null,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -121,7 +122,8 @@ public class CoreDataSource {
             String name = cursor.getString(1);
             String date = cursor.getString(2);
             Boolean positive = cursor.getString(3).equals("1");
-            todos.add(new Log(id,name,date,positive));
+            Integer value = cursor.getInt(4);
+            todos.add(new Log(id,name,date,positive,value));
             cursor.moveToNext();
         }
         cursor.close();

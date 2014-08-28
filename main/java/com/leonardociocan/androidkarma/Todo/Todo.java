@@ -12,6 +12,12 @@ public class Todo {
         this.Positive = positive;
     }
 
+    public Todo(String name , Integer value , Boolean positive ) {
+        this.Name = name;
+        this.Value = value;
+        this.Positive = positive;
+    }
+
     public long getID() {
 
         return ID;

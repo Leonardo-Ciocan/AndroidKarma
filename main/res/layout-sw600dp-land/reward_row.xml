@@ -7,8 +7,8 @@
     android:maxHeight="50dp"
     android:background="@drawable/reward_row_background"
     android:layout_marginBottom="20dp"
-    android:layout_marginRight="7dp"
-    android:layout_marginLeft="7dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginLeft="1dp"
     >
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,7 +21,7 @@
         <TextView
             android:textAlignment="center"
             android:text="Hello world"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:id="@+id/reward_list_row_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         <TextView
             android:textAlignment="center"
             android:text="150"
-            android:textSize="18dp"
+            android:textSize="13dp"
             android:id="@+id/reward_list_row_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

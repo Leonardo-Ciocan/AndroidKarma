@@ -1,6 +1,8 @@
 package com.leonardociocan.androidkarma.Habit;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.leonardociocan.androidkarma.Core;
+import com.leonardociocan.androidkarma.KarmaChangedListener;
 import com.leonardociocan.androidkarma.R;
 
 import java.util.ArrayList;
@@ -43,7 +46,8 @@ public class HabitHubFragment extends Fragment{
 
                 if(keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
                     Toast.makeText(getActivity() ,"hello",Toast.LENGTH_LONG).show();
-                    Habit habit = new Habit(text.getText().toString());
+                    int value  = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("default_value" , "150"));
+                    Habit habit = new Habit(text.getText().toString() ,value  , true );
                     Core.Habits.add(habit);
                     Core.source.addItem(habit.Name , habit.Value , habit.Positive , "habit");
                     adapter.notifyDataSetChanged();
@@ -55,6 +59,14 @@ public class HabitHubFragment extends Fragment{
 
         listView = (ListView)rootView.findViewById(R.id.habit_list);
         adapter =new HabitListAdapter(getActivity());
+
+        Core.addKarmaEventListener(new KarmaChangedListener() {
+            @Override
+            public void OnKarmaChanged() {
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         listView.setAdapter(adapter);
         return rootView;
     }
