@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import com.leonardociocan.androidkarma.Habit.Habit;
 import com.leonardociocan.androidkarma.Reward.Reward;
+import com.leonardociocan.androidkarma.Todo.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,13 @@ public class Core {
 
     public static Context context;
 
+    public static String Recents;
 
     public static CoreDataSource source;
 
     public static ArrayList<Habit> Habits;
     public static ArrayList<Reward> Rewards;
+    public static ArrayList<Todo> Todos;
 
     private static int Karma;
 

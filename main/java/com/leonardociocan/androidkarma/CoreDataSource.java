@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.leonardociocan.androidkarma.Habit.Habit;
 import com.leonardociocan.androidkarma.Reward.Reward;
+import com.leonardociocan.androidkarma.Todo.Todo;
 
 import java.util.ArrayList;
 
@@ -79,5 +80,22 @@ public class CoreDataSource {
         }
         cursor.close();
         return rewards;
+    }
+
+    public ArrayList<Todo> GetTodos(){
+        ArrayList<Todo> todos = new ArrayList<Todo>();
+        Cursor cursor = database.query(helper.TABLE , new String[] {helper.ID_COLUMN , helper.NAME_COLUMN , helper.VALUE_COLUMN, helper.POSITIVE_COLUMN}
+                ,"type='todo'",null,null,null,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            long id = cursor.getLong(0);
+            String name = cursor.getString(1);
+            Integer value = cursor.getInt(2);
+            Boolean positive = cursor.getString(3).equals("1");
+            todos.add(new Todo(id,name,value,positive));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return todos;
     }
 }

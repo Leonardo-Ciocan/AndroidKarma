@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.leonardociocan.androidkarma.Habit.Habit;
 import com.leonardociocan.androidkarma.Reward.Reward;
+import com.leonardociocan.androidkarma.Todo.Todo;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,9 @@ public class MainActivity extends FragmentActivity {
 
         Core.Rewards = new ArrayList<Reward>();
         Core.Rewards = Core.source.GetRewards();
+
+        Core.Todos = new ArrayList<Todo>();
+        Core.Todos = Core.source.GetTodos();
 
 
         mDemoCollectionPagerAdapter =

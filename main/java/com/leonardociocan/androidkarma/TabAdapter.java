@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.leonardociocan.androidkarma.Habit.HabitHubFragment;
 import com.leonardociocan.androidkarma.Reward.RewardHubFragment;
+import com.leonardociocan.androidkarma.Todo.TodoHubFragment;
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.
@@ -25,9 +26,13 @@ public class TabAdapter extends FragmentStatePagerAdapter {
             return new HabitHubFragment();
         }
 
+        if(i == 2) return new TodoHubFragment();
+
         if(i==3){
             return new RewardHubFragment();
         }
+
+
 
         Fragment fragment = new TFragment();
         Bundle args = new Bundle();
