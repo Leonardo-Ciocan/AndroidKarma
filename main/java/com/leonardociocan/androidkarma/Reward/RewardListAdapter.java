@@ -72,7 +72,8 @@ class RewardListAdapter extends BaseAdapter {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Core.setKarma(Core.getKarma()  + ((Reward)vi.getTag()).Value  * (((Reward)vi.getTag()).Positive ? 1 : -1));
+                Core.addKarma( ((Reward)vi.getTag()).Name, ((Reward)vi.getTag()).Value  *  -1);
+                //Core.setKarma(Core.getKarma()  + ((Reward)vi.getTag()).Value  * (((Reward)vi.getTag()).Positive ? 1 : -1));
             }
         });
 

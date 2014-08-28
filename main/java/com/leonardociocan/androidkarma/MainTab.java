@@ -5,13 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-/**
- * Created by leo on 28/08/14.
- */
 public class MainTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -26,6 +24,17 @@ public class MainTab extends Fragment {
             @Override
             public void OnKarmaChanged() {
                 tv.setText(Core.getKarma() + " karma");
+            }
+        });
+
+        final ListView listView = (ListView)rootView.findViewById(R.id.log_list);
+        final LogAdapter adapter = new LogAdapter(getActivity() , Core.Logs);
+        listView.setAdapter(adapter);
+
+        Core.addKarmaEventListener( new KarmaChangedListener() {
+            @Override
+            public void OnKarmaChanged() {
+                adapter.notifyDataSetChanged();
             }
         });
         return rootView;

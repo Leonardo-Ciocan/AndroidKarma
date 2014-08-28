@@ -72,7 +72,7 @@ class HabitListAdapter extends BaseAdapter {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Core.setKarma(Core.getKarma()  + ((Habit)vi.getTag()).Value  * (((Habit)vi.getTag()).Positive ? 1 : -1));
+                Core.addKarma( ((Habit)vi.getTag()).Name, ((Habit)vi.getTag()).Value  * (((Habit)vi.getTag()).Positive ? 1 : -1));
             }
         });
 

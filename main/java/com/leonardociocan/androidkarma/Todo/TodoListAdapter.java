@@ -71,7 +71,9 @@ class TodoListAdapter extends BaseAdapter {
                 Todo h =  ((Todo) vi.getTag());
                 h.Positive = (positive.isChecked());
                 Core.source.updateItem(h.getID() , h.getName() , h.getValue() , h.Positive , "todo");
-                Core.setKarma(Core.getKarma()  + ((Todo)vi.getTag()).Value  * (((Todo)vi.getTag()).Positive ? 1 : -1));
+                Core.addKarma( ((Todo)vi.getTag()).Name, ((Todo)vi.getTag()).Value  * (((Todo)vi.getTag()).Positive ? 1 : -1));
+
+                //Core.setKarma(Core.getKarma()  + ((Todo)vi.getTag()).Value  * (((Todo)vi.getTag()).Positive ? 1 : -1));
             }
         });
 

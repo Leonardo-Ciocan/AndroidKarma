@@ -47,6 +47,10 @@ public class MainActivity extends FragmentActivity {
         Core.Todos = Core.source.GetTodos();
 
 
+        Core.Logs = new ArrayList<Log>();
+        Core.Logs = Core.source.GetLogs();
+
+
         mDemoCollectionPagerAdapter =
                 new TabAdapter(
                         getSupportFragmentManager());
