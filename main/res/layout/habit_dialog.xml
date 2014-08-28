@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginLeft="10dp"
+        android:textColor="#cf000000"
+        />
+    <EditText
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/habit_dialog_name"
+        android:layout_gravity="center_horizontal"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Value"
+        android:layout_marginLeft="10dp"
+        android:textColor="#cf000000"
+        />
+
+    <EditText
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/habit_dialog_value"
+        android:inputType="numberDecimal"
+        />
+
+    <Switch
+        android:id="@+id/habit_dialog_positive"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Positive action"/>
+
+    <Button
+        android:textColor="#fff"
+        android:id="@+id/delete_habit"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:text="Delete this habit"
+        android:layout_gravity="center"/>
+</LinearLayout>
