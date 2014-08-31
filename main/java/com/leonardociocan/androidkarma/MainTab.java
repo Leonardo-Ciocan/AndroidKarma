@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,10 +32,19 @@ public class MainTab extends Fragment {
         final LogAdapter adapter = new LogAdapter(getActivity() , Core.Logs);
         listView.setAdapter(adapter);
 
+
+        final Chart c = (Chart)rootView.findViewById(R.id.chart);
+        //final Chart c = new Chart(this);
+        //c.addView(c);
+
+
+        c.invalidate();
+
         Core.addKarmaEventListener( new KarmaChangedListener() {
             @Override
             public void OnKarmaChanged() {
                 adapter.notifyDataSetChanged();
+               c.invalidate();
             }
         });
         return rootView;

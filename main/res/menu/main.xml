@@ -5,4 +5,5 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/clear_recents" android:title="Clear all recents"/>
 </menu>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:background="#fff"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Karma is an app that helps you balance your life. You complete things to earn karma and use it to get certain perks.
+There are 3 kind of items you can have in this app. Habits , todos and rewards."
+        android:layout_margin="15dp"
+        android:textColor="@color/gray"
+        android:textSize="8pt"
+        android:fontFamily="sans-serif-thin"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/habit"
+        android:maxHeight="100dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A habit is something you do often , like 'Studying for 1 hour' , but can also be negative like 'Taking an afternoon nap' , based on whether they are positive or not , it can gain or lose you karma.
+"
+        android:layout_margin="15dp"
+        android:textColor="@color/green"
+        android:textSize="8pt"
+        android:fontFamily="sans-serif-thin"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/todo"
+        android:maxHeight="100dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A habit is something you do often , like 'Studying for 1 hour' , but can also be negative like 'Taking an afternoon nap' , based on whether they are positive or not , it can gain or lose you karma.
+"
+        android:layout_margin="15dp"
+        android:textColor="@color/blue"
+        android:textSize="8pt"
+        android:fontFamily="sans-serif-thin"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/reward"
+        android:maxHeight="100dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A habit is something you do often , like 'Studying for 1 hour' , but can also be negative like 'Taking an afternoon nap' , based on whether they are positive or not , it can gain or lose you karma.
+"
+        android:layout_margin="15dp"
+        android:textColor="@color/orange"
+        android:textSize="8pt"
+        android:fontFamily="sans-serif-thin"/>
+
+</LinearLayout>
+
+</ScrollView>

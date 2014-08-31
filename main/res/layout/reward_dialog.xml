@@ -4,6 +4,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--<ImageView
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="100dp"
+        android:maxHeight="100dp"
+        android:minHeight="100dp"
+        android:src="@drawable/reward"
+        />-->
+
+
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="fill_parent"

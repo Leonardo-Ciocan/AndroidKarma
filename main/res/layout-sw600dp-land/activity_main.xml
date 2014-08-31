@@ -14,28 +14,33 @@
         android:layout_height="match_parent" />-->
 
     <LinearLayout
-
+        android:layout_marginLeft="10dp"
         android:id="@+id/first_col"
         android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_marginRight="10dp"></LinearLayout>
     <LinearLayout
 
         android:id="@+id/second_col"
         android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_marginRight="10dp"></LinearLayout>
     <LinearLayout
 
         android:id="@+id/third_col"
         android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_marginRight="10dp"></LinearLayout>
     <LinearLayout
 
         android:id="@+id/fourth_col"
         android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_marginRight="10dp"
+        ></LinearLayout>
 
 </LinearLayout>

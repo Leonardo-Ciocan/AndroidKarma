@@ -5,4 +5,5 @@
     <item name="gray" type="color">#D3D3D3</item>
     <item name="blue" type="color">#0198E1</item>
     <item name="orange" type="color">#FFA500</item>
+    <item name="pink_error" type="color">#CC3232</item>
 </resources>

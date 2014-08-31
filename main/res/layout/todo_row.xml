@@ -10,12 +10,17 @@
     android:layout_marginRight="7dp"
     android:layout_marginLeft="7dp"
     >
+
     <CheckBox
         android:id="@+id/todo_checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:background="@drawable/check_background"
+
+        />
 
     <LinearLayout
+        android:background="@drawable/item_background"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"

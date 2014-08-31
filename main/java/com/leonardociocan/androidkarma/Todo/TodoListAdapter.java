@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.PreferenceManager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,7 +134,9 @@ class TodoListAdapter extends BaseAdapter {
                             }
                         }).setTitle("Edit Todo").show();
 
-
+                int w = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDimension(R.dimen.dialog_width), context.getResources().getDisplayMetrics());
+                if(w < 0) w = -1;
+                diag.getWindow().setLayout(w, -2);
                 Button deleteBtn = (Button)v.findViewById(R.id.delete_todo);
                 deleteBtn.setOnClickListener(new View.OnClickListener() {
                     @Override

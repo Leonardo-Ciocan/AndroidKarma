@@ -3,9 +3,11 @@ package com.leonardociocan.androidkarma.Reward;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +74,15 @@ class RewardListAdapter extends BaseAdapter {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Core.addKarma( ((Reward)vi.getTag()).Name, ((Reward)vi.getTag()).Value  *  -1);
+                if(Core.getKarma() - ((Reward) vi.getTag()).Value >= 0 ) {
+                    Core.addKarma(((Reward) vi.getTag()).Name, ((Reward) vi.getTag()).Value * -1);
+                }
+                else{
+                    AlertDialog.Builder diag = new AlertDialog.Builder(context);
+                    diag.setMessage("You will need to earn more karma before you can afford this reward.")
+                            .setTitle("Nope").setPositiveButton("Got it",null).show();
+                }
+
                 //Core.setKarma(Core.getKarma()  + ((Reward)vi.getTag()).Value  * (((Reward)vi.getTag()).Positive ? 1 : -1));
             }
         });
@@ -115,6 +125,9 @@ class RewardListAdapter extends BaseAdapter {
 
                             }
                         }).setTitle("Edit Reward").show();
+                int w = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDimension(R.dimen.dialog_width), context.getResources().getDisplayMetrics());
+                if(w < 0) w = -1;
+                diag.getWindow().setLayout(w, -2);
 
 
                 Button deleteBtn = (Button)v.findViewById(R.id.delete_reward);

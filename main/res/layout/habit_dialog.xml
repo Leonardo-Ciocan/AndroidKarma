@@ -12,6 +12,7 @@
         android:layout_marginLeft="10dp"
         android:textColor="#cf000000"
         />
+
     <EditText
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"

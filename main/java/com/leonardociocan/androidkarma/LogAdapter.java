@@ -20,7 +20,7 @@ public class LogAdapter extends ArrayAdapter<Log> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        position = Core.Logs.size() - position - 1;
         if(convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.log_row,parent,false);
 

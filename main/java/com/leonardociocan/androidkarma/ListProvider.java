@@ -40,7 +40,8 @@ public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
         Core.Logs = Core.source.GetLogs();
 
 
-        for(Log l : Core.Logs){
+        for(int x = Core.Logs.size() - 1; x >= 0;x--){
+            Log l = Core.Logs.get(x);
             listItemList.add(l);
         }
 

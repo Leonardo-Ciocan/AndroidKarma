@@ -75,8 +75,13 @@ public class Core {
     }
 
     public static int[] LogValues(){
+        if (Logs == null)return new int[]{};
         int[] vs = new int[Logs.size()];
-        for(int x = 0; x< Logs.size();x++) vs[x] = Logs.get(x).Value;
+        int acc = 0;
+        for(int x = 0; x< Logs.size();x++) {
+            vs[x] = Logs.get(x).Value + acc;
+            acc = vs[x];
+        }
         return vs;
     }
 }

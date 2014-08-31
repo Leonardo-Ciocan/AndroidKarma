@@ -1,15 +1,26 @@
 package com.leonardociocan.androidkarma;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.leonardociocan.androidkarma.Habit.Habit;
@@ -26,12 +37,17 @@ public class MainActivity extends FragmentActivity {
 
     TabAdapter mDemoCollectionPagerAdapter;
     ViewPager mViewPager;
-
+    boolean HideClear;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent tutorial_start = new Intent();
+        tutorial_start.setClass(this , TutorialActivity.class);
+        //startActivity(tutorial_start);
+
         setContentView(R.layout.activity_main);
 
         boolean tablet = getResources().getBoolean(R.bool.isTablet);
@@ -74,13 +90,28 @@ public class MainActivity extends FragmentActivity {
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
                 }
-
+                int last_pos = 0;
                 @Override
                 public void onPageSelected(int position) {
                     actionBar.setSelectedNavigationItem(position);
 
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colors[position])));
-                    actionBar.setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(colors[position])));
+                    //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colors[position])));
+                    //actionBar.setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(colors[position])));
+
+                    ColorDrawable dr = new ColorDrawable(getResources().getColor(colors[last_pos]));
+                    ColorDrawable dr1 = new ColorDrawable(getResources().getColor(colors[position]));
+                    TransitionDrawable tr = new TransitionDrawable(new Drawable[]{dr,dr1});
+
+                    last_pos = position;
+                    ColorDrawable xdr = new ColorDrawable(getResources().getColor(colors[last_pos]));
+                    ColorDrawable xdr1 = new ColorDrawable(getResources().getColor(colors[position]));
+                    TransitionDrawable tr2 = new TransitionDrawable(new Drawable[]{xdr,xdr1});
+
+                    actionBar.setBackgroundDrawable(tr);
+                    actionBar.setStackedBackgroundDrawable(tr2);
+
+                    tr.startTransition(400);
+                    tr2.startTransition(400);
                 }
 
                 @Override
@@ -90,14 +121,13 @@ public class MainActivity extends FragmentActivity {
             });
 
 
-            //final Chart chart = (Chart)findViewById(R.id.chart);
-            //chart.draw(Core.LogValues());
+
+
 
             Core.addKarmaEventListener(new KarmaChangedListener() {
                 @Override
                 public void OnKarmaChanged() {
                     actionBar.setTitle(Core.getKarma() +" karma");
-                    //chart.draw(Core.LogValues());
                 }
             });
 
@@ -109,6 +139,8 @@ public class MainActivity extends FragmentActivity {
                 @Override
                 public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
                     mViewPager.setCurrentItem(tab.getPosition());
+                    //HideClear = tab.getPosition() != 0;
+                    //if(HideClear) invalidateOptionsMenu();
 
                 }
 
@@ -124,15 +156,21 @@ public class MainActivity extends FragmentActivity {
             };
 
             String[] names = new String[]{"Info" , "Habits" , "ToDos" , "Rewards"};
+
             // Add 3 tabs, specifying the tab's text and TabListener
             for (int i = 0; i < 4; i++) {
                 actionBar.addTab(
                         actionBar.newTab()
                                 .setText(names[i])
                                 .setTabListener(tabListener));
+
+
             }
+
+
         }
         else{
+            getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange)));
             //LinearLayout first = (LinearLayout)findViewById(R.id.first_col);
             getSupportFragmentManager().beginTransaction().add(R.id.first_col , new MainTab()).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.second_col , new HabitHubFragment()).commit();
@@ -143,7 +181,6 @@ public class MainActivity extends FragmentActivity {
 
 
 
-
     }
 
 
@@ -151,6 +188,8 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        menu.getItem(0).setVisible(HideClear);
         return true;
     }
 
@@ -166,6 +205,22 @@ public class MainActivity extends FragmentActivity {
             startActivityForResult(intent, 0);
             return true;
         }
+        else if(id == R.id.clear_recents){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Are you sure?").setMessage("This will delete all logs/karma transactions including the graph below")
+                    .setPositiveButton("Delete",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            for(Log l : Core.Logs){
+                                Core.source.deleteLog(l.id);
+                            }
+                            Core.Logs.clear();
+                            Core.triggerChanged();
+                        }
+                    }).setNegativeButton("Cancel",null).show();
+        }
+
+
         return super.onOptionsItemSelected(item);
     }
 }

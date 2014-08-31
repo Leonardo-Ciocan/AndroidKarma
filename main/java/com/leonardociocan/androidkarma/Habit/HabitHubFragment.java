@@ -45,7 +45,6 @@ public class HabitHubFragment extends Fragment{
                     return true;
 
                 if(keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                    Toast.makeText(getActivity() ,"hello",Toast.LENGTH_LONG).show();
                     int value  = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("default_value" , "150"));
                     Habit habit = new Habit(text.getText().toString() ,value  , true );
                     Core.Habits.add(habit);

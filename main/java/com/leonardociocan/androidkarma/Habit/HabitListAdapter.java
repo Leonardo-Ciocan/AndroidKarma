@@ -1,12 +1,17 @@
 package com.leonardociocan.androidkarma.Habit;
 
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,12 +55,18 @@ class HabitListAdapter extends BaseAdapter {
         return position;
     }
 
+    int lastPosition = 0;
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         final View vi = inflater.inflate(R.layout.habit_row, null);
         //if (vi == null)
           //  vi = inflater.inflate(R.layout.habit_row, null);
+
+        /*
+        Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        vi.startAnimation(animation);
+        lastPosition = position;*/
 
         vi.setBackgroundColor(context.getResources().getColor(data.get(position).Positive ? R.color.green : R.color.red));
 
@@ -72,7 +83,9 @@ class HabitListAdapter extends BaseAdapter {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Core.addKarma( ((Habit)vi.getTag()).Name, ((Habit)vi.getTag()).Value  * (((Habit)vi.getTag()).Positive ? 1 : -1));
+
+                    Core.addKarma( ((Habit)vi.getTag()).Name, ((Habit)vi.getTag()).Value  * (((Habit)vi.getTag()).Positive ? 1 : -1));
+
             }
         });
 
@@ -119,6 +132,10 @@ class HabitListAdapter extends BaseAdapter {
                             }
                         }).setTitle("Edit habit").show();
 
+                int w = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDimension(R.dimen.dialog_width), context.getResources().getDisplayMetrics());
+                if(w < 0) w = -1;
+                diag.getWindow().setLayout(w, -2);
+
 
                 Button deleteBtn = (Button)v.findViewById(R.id.delete_habit);
                 deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +152,8 @@ class HabitListAdapter extends BaseAdapter {
                                 notifyDataSetChanged();
 
                             }
-                        }).setNegativeButton("Cancel",null).setTitle("Are you sure?").setMessage("Deleting this item cannot be undone").show();
+                        }).setNegativeButton("Cancel",null).setTitle("Are you sure?").setMessage("Deleting this item cannot be undone")
+                                .show();
                     }
                 });
 

@@ -19,8 +19,8 @@
         android:layout_marginTop="15dp"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:fontFamily="sans-serif-thin"
         android:textSize="15pt"
+        android:fontFamily="sans-serif-thin"
         android:id="@+id/karmaLabel"
         android:textColor="@color/orange"/>
     <TextView
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Recent karma transactions"
-        android:textSize="10pt"
+        android:textSize="6pt"
         android:layout_gravity="center"/>
     <ListView
         android:divider="@color/gray"
