@@ -11,7 +11,7 @@ import com.leonardociocan.androidkarma.Todo.Todo;
 
 import java.util.ArrayList;
 
-public class CoreDataSource {
+public class   CoreDataSource {
     SQLiteDatabase database;
     DBHelper helper;
 

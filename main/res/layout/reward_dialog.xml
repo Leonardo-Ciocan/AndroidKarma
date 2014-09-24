@@ -12,7 +12,28 @@
         android:minHeight="100dp"
         android:src="@drawable/reward"
         />-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="70dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reward"
+            android:maxHeight="50dp"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            />
 
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit habit"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/orange"
+            android:textSize="20dp"/>
+    </LinearLayout>
 
     <TextView
         android:layout_marginTop="20dp"

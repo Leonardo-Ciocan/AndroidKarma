@@ -124,7 +124,7 @@ class RewardListAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int id) {
 
                             }
-                        }).setTitle("Edit Reward").show();
+                        }).show();
                 int w = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDimension(R.dimen.dialog_width), context.getResources().getDisplayMetrics());
                 if(w < 0) w = -1;
                 diag.getWindow().setLayout(w, -2);

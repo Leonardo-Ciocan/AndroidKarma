@@ -68,7 +68,7 @@ class HabitListAdapter extends BaseAdapter {
         vi.startAnimation(animation);
         lastPosition = position;*/
 
-        vi.setBackgroundColor(context.getResources().getColor(data.get(position).Positive ? R.color.green : R.color.red));
+       // vi.setBackgroundColor(context.getResources().getColor(data.get(position).Positive ? R.color.green : R.color.red));
 
         TextView text = (TextView) vi.findViewById(R.id.habit_list_row_text);
         text.setText(data.get(position).getName());
@@ -130,7 +130,7 @@ class HabitListAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int id) {
 
                             }
-                        }).setTitle("Edit habit").show();
+                        }).show();
 
                 int w = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDimension(R.dimen.dialog_width), context.getResources().getDisplayMetrics());
                 if(w < 0) w = -1;
