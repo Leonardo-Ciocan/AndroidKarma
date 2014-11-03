@@ -1,6 +1,5 @@
 package com.leonardociocan.androidkarma;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +16,10 @@ import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -33,7 +35,7 @@ import com.leonardociocan.androidkarma.Todo.TodoHubFragment;
 import java.util.ArrayList;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     TabAdapter mDemoCollectionPagerAdapter;
     ViewPager mViewPager;
@@ -56,7 +58,7 @@ public class MainActivity extends FragmentActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Core.setKarma( sharedPreferences.getInt("karma", 0));
-        getActionBar().setTitle(Core.getKarma() + " karma");
+        //getSupportActionBar().setTitle(Core.getKarma() + " karma");
 
         Core.source = new CoreDataSource(this);
         Core.source.open();
@@ -81,7 +83,7 @@ public class MainActivity extends FragmentActivity {
         if(!tablet) {
             mViewPager = (ViewPager) findViewById(R.id.pager);
             mViewPager.setAdapter(mDemoCollectionPagerAdapter);
-            final ActionBar actionBar = getActionBar();
+            final ActionBar actionBar = getSupportActionBar();
 
             final int[] colors = new int[]{ R.color.gray , R.color.green , R.color.blue , R.color.orange };
 
@@ -136,21 +138,20 @@ public class MainActivity extends FragmentActivity {
 
             // Create a tab listener that is called when the user changes tabs.
             ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+
+
                 @Override
-                public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
                     mViewPager.setCurrentItem(tab.getPosition());
-                    //HideClear = tab.getPosition() != 0;
-                    //if(HideClear) invalidateOptionsMenu();
+                }
+
+                @Override
+                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
                 }
 
                 @Override
-                public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
-
-                }
-
-                @Override
-                public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
                 }
             };
@@ -170,7 +171,7 @@ public class MainActivity extends FragmentActivity {
 
         }
         else{
-            getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange)));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange)));
             //LinearLayout first = (LinearLayout)findViewById(R.id.first_col);
             getSupportFragmentManager().beginTransaction().add(R.id.first_col , new MainTab()).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.second_col , new HabitHubFragment()).commit();
